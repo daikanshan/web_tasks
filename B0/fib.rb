@@ -20,7 +20,7 @@ while true do
 	puts "请输入1-100之间的数"
 	num = STDIN.gets
 	begin
-		if(!(num.to_i.to_s+"\n"==num))
+		if(!(num.to_i.to_s==num.chomp))
 			raise "不是整数！"
 		elsif(num.to_i>100||num.to_i<=0)
 			raise "不在有效范围内"
