@@ -1,7 +1,0 @@
-form action="/" method="POST"
-	input type="text" name="message[name]"
-	input.button type="submit" value="New message >>"
-h2 ALL MESSAGES
-ul.messages
-- @messages.each do |msg|
-	== slim :message, locals:{message:msg}

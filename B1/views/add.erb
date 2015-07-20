@@ -1,0 +1,10 @@
+<h2>add message</h2>
+<form method="POST" action="/add">
+	<input type="text" name="author">
+	<input type="textarea" name="message">
+	<input type="submit" value="add">
+</form>
+<%= @error %>
+<% if @info %>
+	<%= @info.id %>
+<% end %>

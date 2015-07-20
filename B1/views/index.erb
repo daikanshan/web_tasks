@@ -1,0 +1,25 @@
+<h2>Test</h2>
+<table>
+	<tr>
+		<th>author</th>
+		<th>message</th>
+	</tr>
+<% if not @info.nil? %>
+<% @info.each do |info| %>
+	<% msg = Message.new(File.join("messages","#{info}.txt")) %>
+	<tr>
+		<td>
+			<%= msg.author %>	
+		</td>
+		<td>
+			<%= msg.message %>
+		</td>
+		<td>
+			<form method="get" action="/delete/<%= msg.id %>">
+				<input type="submit" value="delete">
+			</form>
+		</td>
+	</tr>
+<% end %>
+<% end %>
+</table>

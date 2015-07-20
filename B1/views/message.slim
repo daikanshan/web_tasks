@@ -1,5 +1,0 @@
-li.message id=message.id
-	= message.name
-	form.delete action="/message/#{message.id}" method="POST"
-		input type="hidden" name="_method" value="DELETE"
-		input type="submit" value="删除" title="Delete Message"
