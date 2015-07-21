@@ -1,4 +1,13 @@
 <h2>Test</h2>
+<a href="/add">添加留言</a>
+<form method='get' action="/">
+	<select name='select'>
+		<option value="id">ID</option>
+		<option value="author" selected='selected'>Author</option> 
+	</select>
+	<input type='text' name="value">
+	<input type='submit' value='查询'>
+</form>
 <table>
 	<tr>
 		<th>author</th>
@@ -15,11 +24,12 @@
 			<%= msg.message %>
 		</td>
 		<td>
-			<form method="get" action="/delete/<%= msg.id %>">
+			<form method="post" action="/delete/<%= msg.id %>">
 				<input type="submit" value="delete">
 			</form>
 		</td>
 	</tr>
 <% end %>
 <% end %>
+<%= @error %>
 </table>
