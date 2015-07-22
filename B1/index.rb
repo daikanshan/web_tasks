@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'erb'
 get '/' do
+	@title = "首页"
 	if params[:select]=='author'#查询用户
 		author = params[:value]
 		authorInfo = Gloinfo.new("globleInfo.txt").authorInfo#获取所有用户信息
@@ -29,10 +30,12 @@ get '/' do
 end
 
 get '/add' do
+	@title = "添加留言"
 	erb :add
 end
 
 post '/add' do
+	@title = "添加留言"
 	@error = ''#to make sure having all needed params
 	if params[:author].nil? or params[:author]==''#用户名为空
 		@error= "author should not be null"
@@ -56,6 +59,7 @@ post '/add' do
 end
 
 post '/delete/:id' do
+	@title = "删除留言"
 	id = params[:id]#因为是POST不用判断id
 	CURD.delete(id)	#删除留言信息
 	erb :delete

@@ -1,17 +1,21 @@
-<h2>Test</h2>
-<a href="/add">添加留言</a>
-<form method='get' action="/">
-	<select name='select'>
+<h2><a href="/">欢迎来到留言板应用！</a></h2>
+<a href="/add"><button type="button" class="btn btn-link">添加留言</button></a>
+<form class="form-inline" method='get' action="/">
+	<select class="form-control" name='select'>
 		<option value="id">ID</option>
 		<option value="author" selected='selected'>Author</option> 
 	</select>
-	<input type='text' name="value">
-	<input type='submit' value='查询'>
+	<div class="form-group">
+		<label class="sr-only">value</label> 
+		<input class="form-control" type='text' name="value">
+	</div>
+	<button type='submit' class="btn btn-default">查询</button>
 </form>
-<table>
+<table class="table table-striped">
 	<tr>
-		<th>author</th>
-		<th>message</th>
+		<th>作者</th>
+		<th>留言</th>
+		<th>操作</th>
 	</tr>
 <% if not @info.nil? %>
 <% @info.each do |info| %>
@@ -25,7 +29,7 @@
 		</td>
 		<td>
 			<form method="post" action="/delete/<%= msg.id %>">
-				<input type="submit" value="delete">
+				<button class="btn btn-danger" type="submit">删除</button>
 			</form>
 		</td>
 	</tr>
