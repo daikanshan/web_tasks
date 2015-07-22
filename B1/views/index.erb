@@ -28,9 +28,17 @@
 			<%= msg.message %>
 		</td>
 		<td>
-			<form method="post" action="/delete/<%= msg.id %>">
-				<button class="btn btn-danger" type="submit">删除</button>
-			</form>
+	<!--		<div class="col-sm-2">
+				<form method="post" action="/edit/<%= msg.id %>">
+					<button class="btn btn-default" type="submit">编辑</button>
+				</form>
+			</div>
+			-->
+	<!--	<div class="col-sm-2">-->
+				<form method="post" action="/delete/<%= msg.id %>">
+					<button class="btn btn-danger" type="submit">删除</button>
+				</form>
+				<!--	</div> -->
 		</td>
 	</tr>
 <% end %>

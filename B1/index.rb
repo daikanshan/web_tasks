@@ -29,6 +29,9 @@ get '/' do
   erb :index
 end
 
+get '/edit' do
+
+end
 get '/add' do
 	@title = "添加留言"
 	erb :add
@@ -186,4 +189,7 @@ class Gloinfo
 			@authorInfo = {}
 		end
 	end
+end
+not_found do
+	404
 end
