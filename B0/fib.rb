@@ -1,52 +1,65 @@
-$arr = [
-	[3524578,2178309,2178309,1346269], #基础矩阵的32次幂
-	[1597,987,987,610],								 #基础矩阵的16次幂
-	[34,21,21,13],										 #基础矩阵的8次幂
-	[5,3,3,2],												 #基础矩阵的4次幂
-	[2,1,1,1],												 #基础矩阵的2次幂
-	[1,1,1,0]													 #基础矩阵的1次幂
-]
+def getArr(k)#把k分成最少个2的n次幂的形式  如：234=2××7+2××6+2××5+2××3+2××1 记录下[7,6,5,3,1]
+		temp = []
+		while k!=0
+			mi = Math.log(k,2).to_i
+			temp<<mi
+			k = k-2**mi
+		end
+		temp
+end
 def fib(k)
+	if k==0
+		return 0
+	end
 	if k<3 
 	 return 1
 	else
-		t00,t01,t10,t11 = 1,1,1,0
+		k = k-1
+		arr = getArr k
+		t00,t01,t10,t11 = 1,1,1,0 #基础矩阵
 		a,b,c,d = t00,t01,t10,t11
-		k = k-2
-		while k>=32 do                    #对于大于等于32次幂的k转换成最多个32次幂的乘方
-			a = t00*$arr[0][0]+t01*$arr[0][2]
-			b = t00*$arr[0][1]+t01*$arr[0][3]
-			c = t10*$arr[0][0]+t11*$arr[0][2]
-			d = t10*$arr[0][1]+t11*$arr[0][3]
-		 	t00,t01,t10,t11 = a,b,c,d
-			k = k-32
-		end
-		mi = 4
-		while mi>=0 do                     #对于小于32次幂的k由大到小转换成最多个16次幂、8次幂、4次幂、2次幂、1次幂的乘方
-			if k>=2**mi
-				a = t00*$arr[5-mi][0]+t01*$arr[5-mi][2]
-				b = t00*$arr[5-mi][1]+t01*$arr[5-mi][3]
-				c = t10*$arr[5-mi][0]+t11*$arr[5-mi][2]
-				d = t10*$arr[5-mi][1]+t11*$arr[5-mi][3]
-		 		t00,t01,t10,t11 = a,b,c,d
-				k = k-2**mi
+		fa,fb,fc,fd = 1,0,0,1 #初始矩阵（处理getArr==[0]）也作为最终结果的矩阵
+		max = Math.log(k,2).to_i
+		bgn = 0
+		while bgn<=max  #计算基础矩阵的n次幂
+			if arr.include?bgn #如果当前的bgn在getArr[k]中，则直接将其纳入最终结果的计算
+				ta = fa*t00+fb*t10
+				tb = fa*t01+fb*t11
+				tc = fc*t00+fd*t10
+				td = fc*t01+fd*t11
+				fa,fb,fc,fd = ta,tb,tc,td
 			end
-			mi = mi-1
+			a = t00*t00+t01*t10
+			b = t00*t01+t01*t11
+			c = t10*t00+t11*t10
+			d = t10*t01+t11*t11
+		 	t00,t01,t10,t11 = a,b,c,d
+			bgn = bgn+1
 		end
-		return t00
+		return fa
 	end
 end
 while true do
-	puts "请输入1-100之间的数"
-	num = STDIN.gets
+	puts "输入n、m,计算fib(n)-fib(m)"
+	puts "输入n："
+	n = gets
+	puts "输入m："
+	m = gets
 	begin
-		if(num.to_i.to_s!=num.chomp)      #用户输入非整数或输入为空
+		if(n.to_i.to_s!=n.chomp||m.to_i.to_s!=m.chomp)      #用户输入非整数或输入为空
 			raise "不是整数！"
-		elsif(num.to_i>100||num.to_i<=0)  #用户输入的整数不在范围  #用户输入的整数不在范围内内
+		elsif(n.to_i>100||n.to_i<=0||m.to_i>100||m.to_i<=0)  #用户输入的整数不在范围  #用户输入的整数不在范围内内
 			raise "不在有效范围内"
 		else
-			(1..num.to_i).each do |i|
-				puts "fib(#{i})=#{fib(i)}"
+			if n.to_i>=m.to_i
+				n,m = m,n
+			end
+			fn = fib(n.to_i)
+			fm = fib(n.to_i-1)
+			puts "fib(#{n.to_i})=#{fn}"
+			((n.to_i+1)..(m.to_i)).each do |i|
+				puts "fib(#{i})=#{fm+fn}"
+				fm,fn=fn,fm+fn
 			end
 		end
 	rescue => e
