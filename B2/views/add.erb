@@ -1,0 +1,16 @@
+<h2>添加留言</h2>
+<form class="form-inline" method="POST" action="/add">
+	<div class="form-group">
+		<label>作者</label>
+		<input type="text" class="form-control" placeholder="作者名不得为数字" name="author">
+	</div>
+	<div class="form-group">
+		<label>留言</label>
+		<input type="text" class=="form-control" placeholder="留言不得少于10个字"name="message">
+	</div>
+	<button type="submit" class="btn btn-default">添加</button>
+</form>
+<div class="error">
+<%= @error %>
+</div>
+<a class="" href="/"><button class="btn btn-link">返回首页</button></a>
