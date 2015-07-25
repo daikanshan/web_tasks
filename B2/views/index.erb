@@ -1,4 +1,9 @@
 <h2><a href="/">欢迎来到留言板应用！</a></h2>
+<% if session['username'].nil?%>
+<h2><a href="/login">登陆</a></h2>
+<% else %>
+	<h2>欢迎<%= session['username'] %></h2>
+<% end %>
 <a href="/add"><button type="button" class="btn btn-link">添加留言</button></a>
 <form class="form-inline" method='get' action="/">
 	<select class="form-control" name='select'>
@@ -17,15 +22,15 @@
 		<th>留言</th>
 		<th>操作</th>
 	</tr>
-<% if not @info.nil? %>
-<% @info.each do |info| %>
-	<% msg = Message.new(File.join("messages","#{info}.txt")) %>
+<% if not @messages.nil? %>
+<% @messages.each do |msg| %>
+	<% user = User.find(msg.user_id) %>
 	<tr>
 		<td>
-			<%= msg.author %>	
+			<%= user.name %>	
 		</td>
 		<td>
-			<%= msg.message %>
+			<%= msg.content %>
 		</td>
 		<td>
 	<!--		<div class="col-sm-2">

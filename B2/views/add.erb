@@ -1,12 +1,10 @@
 <h2>添加留言</h2>
-<form class="form-inline" method="POST" action="/add">
-	<div class="form-group">
-		<label>作者</label>
-		<input type="text" class="form-control" placeholder="作者名不得为数字" name="author">
+<form class="form" method="POST" action="/add">
+	<div class='foem-group'>
+		<label>添加留言</label>
 	</div>
 	<div class="form-group">
-		<label>留言</label>
-		<input type="text" class=="form-control" placeholder="留言不得少于10个字"name="message">
+		<textarea class=="form-control" placeholder="留言不得少于10个字" name="message"></textarea>
 	</div>
 	<button type="submit" class="btn btn-default">添加</button>
 </form>

@@ -1,0 +1,9 @@
+<div class='hint'>
+	<% if not @success %>
+		<ul>抱歉！注册失败！您有<%= @error.length %>个错误：</ul>
+		<% @error.each do |err| %>
+			
+			<li><%= err %></li>
+		<% end %>
+	<% end %>
+</div>
