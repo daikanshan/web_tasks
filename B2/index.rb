@@ -38,7 +38,7 @@ post '/login' do
 	name = params['username']
 	password = params['password']
 	user = User.find_by(name:name,password:password)
-	if user.nil?
+	if user.nil? #登陆信息有误，重新登陆
 		@error<<'用户名或密码错误！'
 		redirect to'/login'
 	else
@@ -116,6 +116,8 @@ end
 
 post '/delete/:id' do
 	@title = "删除留言"
+	message_id = params['id']
+	Message.delete(message_id)
 	erb :delete
 end
 
