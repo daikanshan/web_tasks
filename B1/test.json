@@ -1,0 +1,1 @@
+{"id":9,"all_ids":[8,9],"messages":{"8":{"id":8,"author":"author1","content":"message1 message1","created_at":1438009017},"9":{"id":9,"author":"author2","content":"message2 message2","created_at":1438009029}},"users":["author1","author2","asdfdsa","dai","paeo","adfdsfad"],"user_ids":{"author1":[8],"author2":[9],"asdfdsa":[],"dai":[],"paeo":[],"adfdsfad":[]}}

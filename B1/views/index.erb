@@ -13,32 +13,27 @@
 </form>
 <table class="table table-striped">
 	<tr>
+		<th>ID</th>
 		<th>作者</th>
 		<th>留言</th>
 		<th>操作</th>
 	</tr>
-<% if not @info.nil? %>
-<% @info.each do |info| %>
-	<% msg = Message.new(File.join("messages","#{info}.txt")) %>
+<% if not @ids.nil? %>
+<% @ids.each do |id| %>
 	<tr>
 		<td>
-			<%= msg.author %>	
+			<%= id %>
 		</td>
 		<td>
-			<%= msg.message %>
+			<%= $info.messages[id.to_s]['author'] %>	
 		</td>
 		<td>
-	<!--		<div class="col-sm-2">
-				<form method="post" action="/edit/<%= msg.id %>">
-					<button class="btn btn-default" type="submit">编辑</button>
-				</form>
-			</div>
-			-->
-	<!--	<div class="col-sm-2">-->
-				<form method="post" action="/delete/<%= msg.id %>">
+			<%= $info.messages[id.to_s]['content'] %>
+		</td>
+		<td>
+				<form method="post" action="/delete/<%= id %>">
 					<button class="btn btn-danger" type="submit">删除</button>
 				</form>
-				<!--	</div> -->
 		</td>
 	</tr>
 <% end %>
