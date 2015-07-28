@@ -3,8 +3,8 @@ require 'erb'
 require 'json'
 require_relative 'message.rb'
 before do
-	record = "test.json" #记录信息的文件
-	$info = Message.new(record)
+	$record = "test.json" #记录信息的文件
+	$info = Message.new($record)
 end
 get '/' do
 	@title = "首页"
@@ -65,7 +65,7 @@ post '/add' do
 		author = params[:author]
 		content = params[:message]
 		$info.add(author,content)#添加留言信息
-		$info.save
+		$info.save $record
 	end
 	erb :add
 end
@@ -74,7 +74,7 @@ post '/delete/:id' do
 	@title = "删除留言"
 	id = params[:id]#因为是POST不用判断id
 	$info.delete(id) 
-	$info.save
+	$info.save $record
 	erb :delete
 end
 
