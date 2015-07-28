@@ -16,6 +16,7 @@
 		<th>ID</th>
 		<th>作者</th>
 		<th>留言</th>
+		<th>时间</th>
 		<th>操作</th>
 	</tr>
 <% if not @ids.nil? %>
@@ -29,6 +30,10 @@
 		</td>
 		<td>
 			<%= $info.messages[id.to_s]['content'] %>
+		</td>
+		<td>
+			<% time = Time.at $info.messages[id.to_s]['created_at'] %>
+			<%= "#{time.year}-#{time.month}-#{time.day} #{time.hour}:#{time.min}" %>
 		</td>
 		<td>
 				<form method="post" action="/delete/<%= id %>">

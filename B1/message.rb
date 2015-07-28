@@ -17,9 +17,30 @@ class Message
 
 	def query(arg)
 		if arg.to_i.to_s==arg #查询ID
-			return @information['messages'][arg.to_s]['id']
+			return [@information['messages'][arg.to_s]['id']]
 		else #查询作者
-			return @information['user_ids'][arg.to_s]
+			ids = []
+			authors =' '+@information['users'].join('  ')+' '
+			reg = Regexp.new('[\s][\w]{0,3}'+arg.to_s+'[\w]{0,3}[\s]')
+			search_authors = authors.scan(reg)
+			if search_authors
+				search_authors.each do |author|
+					author = author.split(' ').join
+					if @information['user_ids'][author]
+						@information['user_ids'][author].each do |i|
+							ids << i
+						end
+					end
+				end
+			end
+			search_authors.each do |author|
+				if @information['user_ids'][author]
+					@information['user_ids'][author].each do |i|
+						ids << i
+					end
+				end
+			end
+			return ids
 		end
 	end
 	

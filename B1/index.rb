@@ -10,10 +10,8 @@ get '/' do
 	@title = "首页"
 	if params[:select]=='author'#查询用户
 		author = params[:value]
-		authors = $info.users  #获取所有用户
-		if authors.include?(author)#是否有此用户
 			@ids = $info.query(author).reverse
-		else
+		if @ids == []
 			@ids = []
 			@error = "没有此用户的留言！"
 		end
@@ -21,7 +19,7 @@ get '/' do
 		id = params[:value]
 		all_ids = $info.all_ids #获取当前所有ID
 		if all_ids.include?(id.to_i)#是否有此ID
-			@ids =[$info.query(id.to_s)]
+			@ids =$info.query(id.to_s)
 		else
 			@ids = []
 			@error = "没有此ID的留言！"
