@@ -26,7 +26,36 @@ end
 #routes
 get '/' do
 	@title = "首页"
-	@messages = Message.all.order('created_at DESC')
+	@messages = []
+	search_type = params['select']
+	search_value = params['value']
+	if search_type.nil? ||search_type.empty?
+		@messages = Message.all.order('created_at DESC')
+	elsif search_type == 'id' #用户查询id
+		begin
+			id = Message.find(search_value)
+			if not id.nil?
+				@messages<<id
+			else
+				raise "没有该ID的留言！"
+			end
+		rescue => e
+			@error = "没有该ID的留言信息！"
+			
+		end
+	elsif search_type == 'author' #用户查询留言作者
+		begin
+			user = User.find_by(name: search_value)
+			if not user.nil?
+				user_id = user.id
+			else
+				raise "没有该用户的留言信息！"
+			end
+			@messages = Message.where("user_id =?",user_id).order('created_at DESC')
+		rescue => e
+			@error = e.message
+		end
+	end
   erb :index
 end
 
@@ -89,6 +118,9 @@ get '/edit' do
 end
 get '/add' do
 	@title = "添加留言"
+	if session['username'].nil?
+		redirect to"/login"
+	end
 	erb :add
 end
 
