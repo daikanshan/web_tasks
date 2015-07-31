@@ -1,51 +1,37 @@
-<h2><a href="/">欢迎来到留言板应用！</a></h2>
-<% if session['username'].nil?%>
-<h2><a href="/login">登陆</a></h2>
-<% else %>
-	<h2>欢迎<%= session['username'] %></h2>
-<% end %>
-<a href="/add"><button type="button" class="btn btn-link">添加留言</button></a>
-<form class="form-inline" method='get' action="/">
-	<select class="form-control" name='select'>
-		<option value="id">ID</option>
-		<option value="author" selected='selected'>Author</option> 
-	</select>
-	<div class="form-group">
-		<label class="sr-only">value</label> 
-		<input class="form-control" type='text' name="value">
-	</div>
-	<button type='submit' class="btn btn-default">查询</button>
-</form>
-<table class="table table-striped">
-	<tr>
-		<th>作者</th>
-		<th>留言</th>
-		<th>操作</th>
-	</tr>
 <% if not @messages.nil? %>
 <% @messages.each do |msg| %>
 	<% user = User.find(msg.user_id) %>
-	<tr>
-		<td>
-			<%= user.name %>	
-		</td>
-		<td>
-			<%= msg.content %>
-		</td>
-		<td>
-	<!--		<div class="col-sm-2">
-				<form method="post" action="/edit/<%= msg.id %>">
-					<button class="btn btn-default" type="submit">编辑</button>
-				</form>
+<div class="messages col-sm-8">
+	<div class="message col-sm-8 col-sm-offset-2">
+		<div class="message-header">
+			<div class="author col-sm-2">
+				<%= user.name %>
 			</div>
-			-->
-	<!--	<div class="col-sm-2">-->
-				<form method="post" action="/delete/<%= msg.id %>">
-					<button class="btn btn-danger" type="submit">删除</button>
-				</form>
-				<!--	</div> -->
-		</td>
-	</tr>
+			<div class="dropdown col-sm-1 col-sm-offset-8">
+				<% if !session['username'].nil? && User.find(msg.user_id).name==session['username'] %>
+				<li class="btn btn-link dropdown-toggle" type="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					操作
+					<span class="caret"></span>
+				</li>
+				<ul class="dropdown-menu" aria-labelledby="optionMenu">
+					<li>	
+						<form method="post" action="/delete/<%= msg.id %>">
+							<button class="btn btn-link" type="submit">删除</button>
+						</form>
+					</li>
+				</ul>
+				<% end %>
+			</div>
+		</div>
+		<div class="message-content col-sm-12">
+			<%= msg.content %> 
+		</div>
+		<div class="message-footer col-sm-12">
+			<% time = msg.created_at.localtime %>
+			<%= "#{time.year}-#{time.mon}-#{time.day} #{time.hour}:#{time.min}:#{time.sec}" %>
+		</div>
+	</div>
+</div>
 <% end %>
 <% end %>
 <%= @error %>

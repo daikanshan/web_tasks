@@ -1,0 +1,103 @@
+body{
+    background:dimgrey;
+}
+.dialog-content{
+    margin-top: 50px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border:1px solid rgb(223,223,223);
+    background-color:#f5f5f5;
+}
+.tab-content{
+    padding-top: 20px;
+    /*border-bottom:1px solid rgb(221,221,221);*/
+    /*border-left:1px solid rgb(221,221,221);*/
+    /*border-right:1px solid rgb(221,221,221);*/
+}
+.nav-tabs{
+    height:50px;
+    background:#f5f5f5;
+
+}
+.nav-tabs li{
+    width:50%;
+}
+.nav-tabs .btn {
+    height: 50px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+    font-size: 20px;
+    font-family: "Source Han Sans CN";
+    background-color:#f5f5f5;
+}
+
+.nav-tabs > li.active > a{
+    border:none;
+    height:40px;
+    margin:0px;
+    font-family: "Source Han Sans CN";
+    background: #f5f5f5;
+}
+.nav-tabs>li>a{
+    color: #f5f5f5;
+}
+
+.nav-tabs>li>a:hover{
+    color: dimgray;
+}
+
+.nav-tabs > li.active > a:hover{
+    border:none;
+    height:40px;
+    margin:0px;
+    color:dimgray;
+}
+.nav-tabs > li.active > a:focus{
+    border:none;
+    outline: none;
+    height:40px;
+    color:dimgray;
+}
+
+.nav-tabs > li.active > a:active{
+    border:none;
+    outline: none;
+    height:40px;
+}
+
+.nav-tabs .btn{
+    border-radius: 0px;
+    outline: 0px none;
+    background:dimgray ;
+}
+
+.nav-tabs .btn> a:hover{
+    height:40px;
+    margin-bottom: 0px;
+    background: #f5f5f5;
+}
+
+.nav-tabs .btn>a:active{
+    height:50px;
+    background: #f5f5f5;
+}
+
+.nav-tabs .btn.active> a:hover{
+    height:50px;
+}
+
+.nav-tabs .btn.active> a:focus{
+    height:50px;
+    background:#f5f5f5;
+}
+
+
+
+.long-btn{
+    width:100%;
+    margin-bottom: 10px;
+}
+.forget{
+    marigin-top:-15px;
+}

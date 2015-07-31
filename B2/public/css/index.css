@@ -1,0 +1,22 @@
+body{
+	background-color: rgb(235,235,235);
+}
+.messages{
+}
+.message{
+	margin-top: 10px;
+	border-radius: 10px;
+	background-color: white;
+}
+.author{
+	font-size: 18px;
+	font-weight: 18px;
+	font-style: bold;
+}
+.message-content{
+	margin-top: 10px;
+}
+.message-footer{
+	margin-top: 10px;
+	color:rgb(150,150,150);
+}

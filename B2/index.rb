@@ -58,7 +58,12 @@ get '/' do
 	end
   erb :index
 end
-
+get '/me' do
+	if !session['username'].nil?
+		@messages = Message.where("user_id=?",session['user_id']).order('created_at DESC')
+	end
+	erb :index
+end
 get '/login' do
 	erb :login
 end
@@ -105,14 +110,27 @@ post '/register' do
 		@success = false
 	end
 	if @success #注册信息齐全
-		user = User.create(name:name,password:password)
-		session['username'] = name
-		session['user_id']=user.id
-		redirect to '/'
+		user = User.find_by(name:name)
+		if not user.nil?
+			@error<<"该用户已注册！"
+			@success = false
+		else
+			user = User.create(name:name,password:password)
+			session['username'] = name
+			session['user_id']=user.id
+			redirect to '/'
+		end
 	end
 	erb :hint
 end
 
+get '/relogin' do
+	if !session['username'].nil?
+		session['username']=nil
+		session['user_id']=nil
+	end
+	redirect to '/'
+end
 get '/edit' do
 
 end
@@ -139,8 +157,8 @@ post '/add' do
 	if @error == []
 		message = Message.create(user_id:session['user_id'],
 														content:content,
-														created_at:Time.now.to_i.to_s,
-														modified_at:Time.now.to_i.to_s)
+														created_at:Time.now,
+														modified_at:Time.now)
 		redirect to '/'
 	end
 	erb :add
