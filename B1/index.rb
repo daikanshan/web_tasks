@@ -2,34 +2,28 @@ require 'sinatra'
 require 'erb'
 require 'json'
 require_relative 'message.rb'
+require_relative 'message_manager.rb'
 before do
-	$record = "test.json" #记录信息的文件
-	$info = Message.new($record)
+	@file = "test.json" #记录信息的文件
 end
 get '/' do
 	@title = "首页"
 	if params[:select]=='author'#查询用户
 		author = params[:value]
-			@ids = $info.query(author).reverse
-		if @ids == []
-			@ids = []
+    @messages = MessageManager.query(author:author).reverse
+		if @messages == []
 			@error = "没有此用户的留言！"
 		end
 	elsif params[:select]=='id'#查询id
 		id = params[:value]
-		all_ids = $info.all_ids #获取当前所有ID
-		if all_ids.include?(id.to_i)#是否有此ID
-			@ids =$info.query(id.to_s)
-		else
-			@ids = []
-			@error = "没有此ID的留言！"
+    @messages = MessageManager.query(id:id)
+		if @messages == []
+      @error = "没有此ID的留言！"
 		end
 	else
-		@ids = $info.all_ids #get current id to show in the index
-		@messages = nil
-		if @ids!=[]
-			@ids = @ids.reverse
-			@messages = $info.messages
+		@messages = MessageManager.query() #get current id to show in the index
+		if @messages!=[]
+			@messages = @messages.reverse
 		end
 	end
   erb :index
@@ -62,8 +56,7 @@ post '/add' do
 		@error="添加成功！"
 		author = params[:author]
 		content = params[:message]
-		$info.add(author,content)#添加留言信息
-		$info.save $record
+		MessageManager.add(author,content)#添加留言信息
 	end
 	erb :add
 end
@@ -71,8 +64,7 @@ end
 post '/delete/:id' do
 	@title = "删除留言"
 	id = params[:id]#因为是POST不用判断id
-	$info.delete(id) 
-	$info.save $record
+	MessageManager.delete(id)
 	erb :delete
 end
 
