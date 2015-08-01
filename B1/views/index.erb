@@ -19,24 +19,24 @@
 		<th>时间</th>
 		<th>操作</th>
 	</tr>
-<% if not @ids.nil? %>
-<% @ids.each do |id| %>
+<% if not @messages.nil? %>
+<% @messages.each do |message| %>
 	<tr>
 		<td>
-			<%= id %>
+			<%= message.id %>
 		</td>
 		<td>
-			<%= $info.messages[id.to_s]['author'] %>	
+			<%= message.author %>
 		</td>
 		<td>
-			<%= $info.messages[id.to_s]['content'] %>
+			<%= message.content %>
 		</td>
 		<td>
-			<% time = Time.at $info.messages[id.to_s]['created_at'] %>
-			<%= "#{time.year}-#{time.month}-#{time.day} #{time.hour}:#{time.min}" %>
+			<% time = Time.at message.created_at %>
+			<%= time.strftime("%Y-%m-%d %H:%M:%S") %>
 		</td>
 		<td>
-				<form method="post" action="/delete/<%= id %>">
+				<form method="post" action="/delete/<%= message.id %>">
 					<button class="btn btn-danger" type="submit">删除</button>
 				</form>
 		</td>
