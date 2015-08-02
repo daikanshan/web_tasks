@@ -3,25 +3,28 @@ require 'erb'
 require 'json'
 require_relative 'message.rb'
 require_relative 'message_manager.rb'
+
 before do
-	@file = "test.json" #记录信息的文件
+  file = "test.json" #记录信息的文件
+  @msgMag = MessageManager.new file
 end
+
 get '/' do
 	@title = "首页"
 	if params[:select]=='author'#查询用户
 		author = params[:value]
-    @messages = MessageManager.query(author:author).reverse
+    @messages = @msgMag.query(author:author).reverse
 		if @messages == []
 			@error = "没有此用户的留言！"
 		end
 	elsif params[:select]=='id'#查询id
 		id = params[:value]
-    @messages = MessageManager.query(id:id)
+    @messages = @msgMag.query(id:id)
 		if @messages == []
       @error = "没有此ID的留言！"
 		end
 	else
-		@messages = MessageManager.query() #get current id to show in the index
+		@messages = @msgMag.query() #get current id to show in the index
 		if @messages!=[]
 			@messages = @messages.reverse
 		end
@@ -56,7 +59,7 @@ post '/add' do
 		@error="添加成功！"
 		author = params[:author]
 		content = params[:message]
-		MessageManager.add(author,content)#添加留言信息
+		@msgMag.add(author,content)#添加留言信息
 	end
 	erb :add
 end
@@ -64,7 +67,7 @@ end
 post '/delete/:id' do
 	@title = "删除留言"
 	id = params[:id]#因为是POST不用判断id
-	MessageManager.delete(id)
+	@msgMag.delete(id)
 	erb :delete
 end
 
