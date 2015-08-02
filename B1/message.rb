@@ -19,9 +19,6 @@ class Message
       elsif content.length < 10
         raise "content's length should not be less than 10"
       end
-      if created_at.class!=Time
-        raise "created_at should be a Time"
-      end
     end
     if error == ''
 		  @id,@author,@content,@created_at = id,author,content,created_at
