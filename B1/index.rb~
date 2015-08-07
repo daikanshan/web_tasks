@@ -4,14 +4,11 @@ require 'json'
 
 require_relative './models/message_manager.rb'
 
-
-configure do
-	file = "test.json" #记录信息的文件
-  set :msg, MessageManager.new(file)
-end
 before do
-  @msgMag = settings.msg
+  file = "test.json" #记录信息的文件
+  @msgMag = MessageManager.new file
 end
+
 get '/' do
 	@title = "首页"
 	if params[:select]=='author'#查询用户
