@@ -28,7 +28,7 @@
 		</div>
 		<div class="message-footer col-sm-12">
 			<% time = msg.created_at.localtime %>
-			<%= "#{time.year}-#{time.mon}-#{time.day} #{time.hour}:#{time.min}:#{time.sec}" %>
+			<%= time.strftime("%Y-%m-%d %H:%M:%S") %>
 		</div>
 	</div>
 </div>
