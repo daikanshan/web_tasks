@@ -8,5 +8,12 @@
 /B3/.idea/
 <<<<<<< HEAD
 =======
+/B1/.idea/
+/B1/message.rb
+/B1/message_manager.rb
 /B2/.idea/
+/B2/views/index.erb
+/B3/demo/
+/B3/depot/
+/B3/.idea/
 >>>>>>> dev
