@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+
+  get 'admin/manage'
+
+  get 'admin/user_manage'
+
+  get 'admin/post_manage'
+
+  get 'admin/report'
+
+  get 'admin/feedback'
+
   resources :microposts
   resources :users
   # The priority is based upon order of creation: first created -> highest priority.
