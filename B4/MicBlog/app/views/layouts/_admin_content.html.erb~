@@ -1,0 +1,6 @@
+<div class="container-fluid">
+    <div class="row-fluid">
+    <%= render 'layouts/_admin_sidebar' %>
+<%= yield %>
+    </div>
+</div>

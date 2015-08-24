@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
-  get 'admin/index'
 
-  get 'admin/manage'
+  root 'static_pages#home'
 
-  get 'admin/user_manage'
+  get 'signup' => 'users#new'
 
-  get 'admin/post_manage'
+  get 'admin' => 'admin#index'
 
-  get 'admin/report'
+  get 'admin/manage' =>'admin#manage'
 
-  get 'admin/feedback'
+  get 'admin/user_manage' => 'admin#user_manage'
+
+  get 'admin/post_manage' => 'admin#post_manage'
+
+  get 'admin/report' => 'admin#report'
+
+  get 'admin/feedback' => 'admin#feedback'
 
   resources :microposts
   resources :users

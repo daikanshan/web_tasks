@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require modernizr-2.6.2-respond-1.1.0.min
+//= require jquery-1.9.1.min
+//= require bootstrap.min
+//= require jquery.easy-pie-chart
+//= require scripts
 //= require_tree .
